@@ -60,8 +60,8 @@ all: main-build
 main-build: IL2203-MASTER.elf secondary-outputs
 
 # Tool invocations
-IL2203-MASTER.elf IL2203-MASTER.map: $(OBJS) $(USER_OBJS) /Users/Holger/Documents/KTH/Kurser/IL2203/ECU\ CODE/STM32F091RCTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "IL2203-MASTER.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0 -T"/Users/Holger/Documents/KTH/Kurser/IL2203/ECU CODE/STM32F091RCTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="IL2203-MASTER.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+IL2203-MASTER.elf IL2203-MASTER.map: $(OBJS) $(USER_OBJS) /Users/Holger/Documents/KTH/Kurser/IL2202/IL2202/ECU\ CODE/STM32F091RCTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "IL2203-MASTER.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0 -T"/Users/Holger/Documents/KTH/Kurser/IL2202/IL2202/ECU CODE/STM32F091RCTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="IL2203-MASTER.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
