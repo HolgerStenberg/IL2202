@@ -47,8 +47,8 @@ DMA_HandleTypeDef hdma_usart2_rx;
 /* USER CODE BEGIN PV */
 
 uint8_t BT_TxData[100];
-int Flag = 0;
-char *p;
+uint8_t usart_to_send = 95;
+uint8_t up = 1;
 
 /* USER CODE END PV */
 
@@ -64,7 +64,7 @@ static void MX_USART1_UART_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-uint8_t myTxData[16] = "Hello World\r\n";
+uint8_t myTxData[16];
 
 /* USER CODE END 0 */
 
@@ -108,16 +108,40 @@ int main(void)
   while (1)
   {
 
+	  if (up == 1)
+	  {
 
+		  if (usart_to_send < 100)
+		  {
+			  usart_to_send += 1;
+		  }
+		  else
+		  {
+			  up = 0;
+		  }
+	  }
+	  else
+	  {
+		  if (usart_to_send > 96)
+		  {
+			  usart_to_send -= 1;
+		  }
+		  else
+		  {
+		  	up = 1;
+		  }
+	  }
+
+
+	  myTxData[0] = usart_to_send;
 
 	  HAL_UART_Transmit(&huart2, myTxData, 16, 10);
 
-
 	  HAL_GPIO_WritePin(LD2_GPIO_Port,LD2_Pin, GPIO_PIN_SET);
-	  HAL_Delay(500);
+	  HAL_Delay(100);
 
 	  HAL_GPIO_WritePin(LD2_GPIO_Port,LD2_Pin, GPIO_PIN_RESET);
-	  HAL_Delay(500);
+	  HAL_Delay(100);
 
     /* USER CODE END WHILE */
 
