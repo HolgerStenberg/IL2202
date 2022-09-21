@@ -64,7 +64,7 @@ static void MX_USART1_UART_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-uint8_t myTxData[16];
+uint8_t myTxData[16] = "1\n";
 
 /* USER CODE END 0 */
 
@@ -107,7 +107,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-
+/*
 	  if (up == 1)
 	  {
 
@@ -132,16 +132,18 @@ int main(void)
 		  }
 	  }
 
+*/
 
-	  myTxData[0] = usart_to_send;
+	  for (int i=0; i<100; i++){
+		  HAL_UART_Transmit(&huart1, myTxData, 16, 10);
+		  HAL_Delay(10);
+	  }
 
-	  HAL_UART_Transmit(&huart2, myTxData, 16, 10);
+	  while(1){
+		  HAL_GPIO_TogglePin(LD2_GPIO_Port,LD2_Pin);
+		  HAL_Delay(200);
 
-	  HAL_GPIO_WritePin(LD2_GPIO_Port,LD2_Pin, GPIO_PIN_SET);
-	  HAL_Delay(100);
-
-	  HAL_GPIO_WritePin(LD2_GPIO_Port,LD2_Pin, GPIO_PIN_RESET);
-	  HAL_Delay(100);
+	  }
 
     /* USER CODE END WHILE */
 
