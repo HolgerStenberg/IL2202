@@ -7,7 +7,7 @@ void setup()
   // put your setup code here, to run once:
   Serial.begin(9600);
   Serial.println("ready");
-  Bluetooth.begin(38400);
+  Bluetooth.begin(9600);
 }
 
 void loop() 
@@ -19,11 +19,11 @@ void loop()
     c=Bluetooth.read();
     Serial.write(c);
   }
-  
+  /*
   if(Serial.available())
   {
     c=Serial.read();
     Bluetooth.write(c);  
     
-  } 
+  } */
 }
